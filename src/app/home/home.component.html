@@ -1,1 +1,6 @@
-<p>home works!</p>
+<h2>List of the links: </h2>
+<ul>
+  <li *ngFor="let link of listLinks">
+    <a href="#" target="_blank">{{ link.name }} ({{ link.url }})</a>
+  </li>
+</ul>
