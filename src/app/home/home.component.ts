@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { SearchComponent } from '../search/search.component';
 import { ListModule } from '../model/list/list.module';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ListItemModule } from '../model/list-item/list-item.module';
@@ -10,7 +9,7 @@ import { ListItemModule } from '../model/list-item/list-item.module';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, SearchComponent, PaginationComponent],
+  imports: [CommonModule, PaginationComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -20,7 +19,7 @@ export class HomeComponent {
   currentPage!: number;
   showItems!: ListItemModule[];
 
-  constructor(private listService: ListService, private router: ActivatedRoute) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit(): void {
     this.listService.list.subscribe(list => {
@@ -35,13 +34,6 @@ export class HomeComponent {
 
   setShowItems() {
     this.showItems = this.list.items;
-
-    this.router.params.subscribe(params => {
-      if(params['query']) {
-        this.showItems = this.showItems
-          .filter(item => item.link.name.toLowerCase().includes(params['query'].toLowerCase()));
-      }
-    });
 
     const startIndex = (this.currentPage - 1) * this.list.itemPerPage;
     this.showItems = this.showItems.slice(startIndex, startIndex + this.list.itemPerPage);
