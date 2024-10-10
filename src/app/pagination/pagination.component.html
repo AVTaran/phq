@@ -1,0 +1,21 @@
+<p>pagination</p>
+<div>
+  <ul>
+    <li *ngIf="pagination.prev > 0">
+      <a href="#" (click)="changePage(pagination.prev)"><</a>
+    </li>
+    <li *ngIf="pagination.prev > 1">
+      ...
+    </li>
+    <li *ngFor="let idPage of pagination.idsPages">
+      <a href="#" (click)="changePage(idPage)">{{ idPage }}</a>
+    </li>
+    <li *ngIf="pagination.next > 0 && pagination.next < pagination.amountPages">
+      ...
+    </li>
+    <li *ngIf="pagination.next > 0">
+      <a href="#" (click)="changePage(pagination.next)">></a>
+    </li>
+  </ul>
+</div>
+

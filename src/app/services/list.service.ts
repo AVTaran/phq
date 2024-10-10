@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ListModule } from '../model/list/list.module';
 import { ListItemModule } from '../model/list-item/list-item.module';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,15 +9,18 @@ import { ListItemModule } from '../model/list-item/list-item.module';
 })
 
 export class ListService {
-  private list: ListModule = new ListModule();
+  list: BehaviorSubject<ListModule> = new BehaviorSubject(new ListModule());
+  currentPage: BehaviorSubject<number> = new BehaviorSubject(1);
 
   constructor() {}
 
   addToList(ListItem: ListItemModule) {
-    this.list.items.push(ListItem);
+    let newList: ListModule = this.list.getValue();
+    newList.items.push(ListItem);
+    this.list.next(newList);
   }
 
-  getList() {
-    return this.list;
+  changeCurrentPage(page: number) {
+    this.currentPage.next(page);
   }
 }

@@ -26,5 +26,7 @@ export class SearchComponent {
   search() {
     if(this.query)
       this.router.navigateByUrl(`/search/${this.query}`);
+    else
+      this.router.navigateByUrl(`/`);
   }
 }

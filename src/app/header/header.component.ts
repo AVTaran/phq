@@ -15,8 +15,8 @@ export class HeaderComponent {
 
   constructor(private listService: ListService) { }
 
-  addToTheList(name: string, url: string): void {
-    let link = new LinkModule(name, url);
+  addLinkToList(name: string, url: string): void {
+    const link = new LinkModule(name, url);
     this.listService.addToList(new ListItemModule(link))
   }
 }
