@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { CommonModule } from '@angular/common';
-import { LinkModule } from '../model/link/link.module';
-import { ActivatedRoute, Router } from '@angular/router';
-import {SearchComponent} from '../search/search.component';
+import { ActivatedRoute } from '@angular/router';
+import { SearchComponent } from '../search/search.component';
+import { ListModule } from '../model/list/list.module';
 
 @Component({
   selector: 'app-home',
@@ -14,20 +14,24 @@ import {SearchComponent} from '../search/search.component';
 })
 
 export class HomeComponent {
+  list!: ListModule;
 
-  listLinks: LinkModule[] = [];
-
-  constructor(private listService: ListService, private router: ActivatedRoute) { }
+  constructor(private listService: ListService, private router: ActivatedRoute) {
+    this.setList();
+  }
 
   ngOnInit(): void {
     this.router.params.subscribe(params => {
       if(params['query']) {
-        this.listLinks = this.listService.getAll()
-          .filter(list => list.name.toLowerCase().includes(params['query'].toLowerCase()));
+        this.list.items = this.listService.getList().items
+          .filter(item => item.link.name.toLowerCase().includes(params['query'].toLowerCase()));
       } else {
-        this.listLinks = this.listService.getAll();
+        this.list = this.listService.getList();
       }
     })
   }
 
+  setList(){
+    this.list = this.listService.getList();
+  }
 }

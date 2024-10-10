@@ -1,17 +1,13 @@
 <header>
   <div class="container header">
-    <form class="add-new-link-form" action="#">
-      <div class="form-input-box input-link-url">
-        <label>URL:</label>
-        <input type="text" value="" placeholder="https://...">
-      </div>
-      <div class="form-input-box input-link-name">
-        <label>Name:</label>
-        <input type="text" value="" placeholder="Name of the bookmark">
-      </div>
-      <div class="form-button">
-        <button>Add Link</button>
-      </div>
-    </form>
+    <div class="input-box">
+      <input type="text" #inputLinkName value="" placeholder="Name of the bookmark">
+    </div>
+    <div class="input-box">
+      <input type="text" #inputLinkUrl value="" placeholder="https://...">
+    </div>
+    <div class="button">
+      <button (click)="addToTheList(inputLinkName.value, inputLinkUrl.value)">Add Link</button>
+    </div>
   </div>
 </header>

@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { LinkModule } from '../model/link/link.module';
+import { ListModule } from '../model/list/list.module';
+import { ListItemModule } from '../model/list-item/list-item.module';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ListService {
+  private list: ListModule = new ListModule();
 
   constructor() {}
 
-  getAll(): LinkModule[] {
-    return [
-      { name: 'Google', url: 'google.com' },
-      { name: 'Yandex', url: 'yandex.com' },
-      { name: 'Baidu', url: 'baidu.com' },
-    ];
+  addToList(ListItem: ListItemModule) {
+    this.list.items.push(ListItem);
+  }
+
+  getList() {
+    return this.list;
   }
 }

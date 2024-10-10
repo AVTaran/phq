@@ -1,7 +1,14 @@
 <app-search></app-search>
-<h2>List of the links: </h2>
+
+<h2>List of the links</h2>
+
+<div *ngIf="list.total;else empty_list_message">
+  <span>Total amount: {{ list.total }}</span>
+</div>
+<ng-template #empty_list_message>The list is empty. Start to add the links.</ng-template>
+
 <ul>
-  <li *ngFor="let link of listLinks">
-    <a href="#" target="_blank">{{ link.name }} ({{ link.url }})</a>
+  <li *ngFor="let item of list.items">
+    <a href="#" target="_blank">{{ item.link.name }} ({{ item.link.url }})</a>
   </li>
 </ul>
