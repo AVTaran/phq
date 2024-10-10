@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ListModule } from '../model/list/list.module';
-import { ListItemModule } from '../model/list-item/list-item.module';
+import { List } from '../model/list.model';
+import { ListItem } from '../model/list-item.model';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -9,13 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class ListService {
-  list: BehaviorSubject<ListModule> = new BehaviorSubject(new ListModule());
+  list: BehaviorSubject<List> = new BehaviorSubject(new List());
   currentPage: BehaviorSubject<number> = new BehaviorSubject(1);
 
   constructor() {}
 
-  addToList(ListItem: ListItemModule) {
-    let newList: ListModule = this.list.getValue();
+  addToList(ListItem: ListItem) {
+    let newList: List = this.list.getValue();
     newList.items.push(ListItem);
     this.list.next(newList);
   }

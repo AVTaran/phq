@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ListModule } from '../model/list/list.module';
+import { List } from '../model/list.model';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { ListItemModule } from '../model/list-item/list-item.module';
+import { ListItem } from '../model/list-item.model';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +15,9 @@ import { ListItemModule } from '../model/list-item/list-item.module';
 })
 
 export class HomeComponent {
-  list!: ListModule;
+  list!: List;
   currentPage!: number;
-  showItems!: ListItemModule[];
+  showItems!: ListItem[];
 
   constructor(private listService: ListService) { }
 

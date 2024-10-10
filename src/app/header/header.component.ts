@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LinkModule } from '../model/link/link.module';
+import { Link } from '../model/link.model';
 import { ListService } from '../services/list.service';
-import { ListItemModule } from '../model/list-item/list-item.module';
+import { ListItem } from '../model/list-item.model';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,7 @@ export class HeaderComponent {
   constructor(private listService: ListService) { }
 
   addLinkToList(name: string, url: string): void {
-    const link = new LinkModule(name, url);
-    this.listService.addToList(new ListItemModule(link))
+    const link = new Link(name, url);
+    this.listService.addToList(new ListItem(link))
   }
 }

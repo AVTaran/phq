@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { NgForOf, NgIf } from '@angular/common';
-import { PaginationModule } from '../model/pagination/pagination.module';
-import { ListModule } from '../model/list/list.module';
+import { Pagination } from '../model/pagination.model';
+import { List } from '../model/list.model';
 
 @Component({
   selector: 'app-pagination',
@@ -16,8 +16,8 @@ import { ListModule } from '../model/list/list.module';
 })
 
 export class PaginationComponent {
-  list: ListModule = new ListModule();
-  pagination!: PaginationModule;
+  list: List = new List();
+  pagination!: Pagination;
   currentPage: number = 1;
 
   constructor(private listService: ListService) { }
