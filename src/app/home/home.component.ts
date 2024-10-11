@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { ListService } from '../services/list.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 import { List } from '../model/list.model';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ListItem } from '../model/list-item.model';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, PaginationComponent],
+  imports: [CommonModule, PaginationComponent, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

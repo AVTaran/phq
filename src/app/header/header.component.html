@@ -1,13 +1,28 @@
 <header>
   <div class="container header">
-    <div class="input-box">
-      <input type="text" #inputLinkName value="" placeholder="Name of the bookmark">
-    </div>
-    <div class="input-box">
-      <input type="text" #inputLinkUrl value="" placeholder="https://...">
-    </div>
-    <div class="button">
-      <button (click)="addLinkToList(inputLinkName.value, inputLinkUrl.value)">Add Link</button>
-    </div>
+    <form [formGroup]="linkForm">
+
+      <div class="input-box">
+        <input type="text" #inputLinkName value="" placeholder="Bookmark's Name" formControlName="linkName" id="linkName">
+        <div *ngIf="linkForm.controls['linkName'].invalid && (linkForm.controls['linkName'].dirty)">
+          <small *ngIf="linkForm.controls['linkName'].errors?.['required']">Field is required.</small>
+          <small *ngIf="linkForm.controls['linkName'].errors?.['minlength']">
+            Minimum length is {{ linkForm.controls['linkName'].errors?.['minlength'].requiredLength }} characters.
+          </small>
+        </div>
+      </div>
+
+      <div class="input-box">
+        <input type="text" #inputLinkUrl value="" placeholder="URL" formControlName="linkUrl" id="linkUrl"/>
+        <div *ngIf="linkForm.controls['linkUrl'].errors?.['linkUrlValidator']">
+          <small>{{ linkForm.controls['linkUrl'].errors?.['linkUrlValidator'].message }}</small>
+        </div>
+      </div>
+
+      <div class="button">
+        <button [disabled]="linkForm.invalid" (click)="addLinkToList(inputLinkName.value, inputLinkUrl.value)">Add Link</button>
+      </div>
+
+    </form>
   </div>
 </header>
